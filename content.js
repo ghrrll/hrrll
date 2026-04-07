@@ -23,20 +23,19 @@ Based in Chattanooga, TN.`,
     },
     {
       label: "Building",
-      text: `An AI product layer inside Kalibri Labs — competitive intelligence agents,
-             automated market briefings, bid analysis tools, and revenue analytics.
+      text: `An AI product layer inside Kalibri — competitive intelligence agents,
+             automated market briefings, and revenue analytics.
              The backlog never shrinks.`
     },
     {
       label: "On the side",
-      text: `<strong>hrrll</strong> — design and build projects for people I believe in.`
+      text: `<strong>hrrll</strong> — design and build projects for people & projects I believe in.`
     }
   ],
 
   links: {
     linkedin: "https://www.linkedin.com/in/grahamharrell",
     github:   "https://github.com/ghrrll",
-    kalibri:  "https://kalibrilabs.com",
     email:    "graham@hrrll.com"
   },
 
