@@ -57,7 +57,6 @@
       align-items: center;
     }
 
-    /* ── Portrait ── */
     .portrait {
       width: 100px;
       height: 100px;
@@ -76,7 +75,6 @@
       box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2);
     }
 
-    /* ── Wordmark ── */
     .wordmark {
       text-align: center;
       margin-bottom: 2.5rem;
@@ -106,7 +104,6 @@
       color: var(--accent);
     }
 
-    /* ── Divider ── */
     .divider {
       width: 36px;
       height: 1px;
@@ -117,7 +114,6 @@
       animation-delay: 0.85s;
     }
 
-    /* ── Bio ── */
     .bio {
       text-align: center;
       margin-bottom: 3rem;
@@ -134,12 +130,8 @@
       max-width: 500px;
     }
 
-    .bio p strong {
-      color: var(--text);
-      font-weight: 400;
-    }
+    .bio p strong { color: var(--text); font-weight: 400; }
 
-    /* ── Work section ── */
     .work {
       width: 100%;
       border: 1px solid var(--border);
@@ -157,9 +149,7 @@
       align-items: start;
     }
 
-    .work-item + .work-item {
-      border-top: 1px solid var(--border);
-    }
+    .work-item + .work-item { border-top: 1px solid var(--border); }
 
     .work-label {
       font-family: 'IBM Plex Mono', monospace;
@@ -175,14 +165,11 @@
       font-size: 0.88rem;
       line-height: 1.7;
       color: var(--text-muted);
+      text-align: left;
     }
 
-    .work-text strong {
-      color: var(--text);
-      font-weight: 400;
-    }
+    .work-text strong { color: var(--text); font-weight: 400; }
 
-    /* ── Links ── */
     .links {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -229,7 +216,6 @@
 
     .btn:hover svg { opacity: 1; }
 
-    /* ── Footer ── */
     .footer {
       margin-top: 4rem;
       opacity: 0;
@@ -247,64 +233,60 @@
   </style>
 </head>
 <body>
-
   <div class="container">
 
     <img src="photo.jpg" alt="Graham Harrell" class="portrait" onerror="this.style.display='none'">
 
     <div class="wordmark">
-      <h1>Graham Harrell</h1>
-      <div class="role">Head of Product &nbsp;·&nbsp; Kalibri Labs</div>
+      <h1 id="name"></h1>
+      <div class="role" id="role"></div>
     </div>
 
     <div class="divider"></div>
 
-    <div class="bio">
-      <p>
-        I'm a product leader at <strong>Kalibri Labs</strong>, where I work at the intersection of
-        data, hospitality, and AI. I build tools that help hotel operators understand their competitive
-        position and make smarter revenue decisions — from analytics and benchmarking to
-        agent-driven market intelligence. Based in Chattanooga, TN.
-      </p>
-    </div>
+    <div class="bio"><p id="bio"></p></div>
 
-    <div class="work">
+    <div class="work" id="work"></div>
 
-      <div class="work-item">
-        <div class="work-label">Currently</div>
-        <div class="work-text">Head of Product at <strong>Kalibri Labs</strong> — building data and AI products for the hotel industry.</div>
-      </div>
+    <div class="links" id="links"></div>
 
-      <div class="work-item">
-        <div class="work-label">Building</div>
-        <div class="work-text">Automated intelligence agents that synthesize competitive signals and deliver daily and weekly briefings to hotel operators.</div>
-      </div>
+    <div class="footer"><p id="footer"></p></div>
 
-      <div class="work-item">
-        <div class="work-label">Studio</div>
-        <div class="work-text"><strong>hrrll</strong> — a small studio for design and build projects for people I believe in.</div>
-      </div>
+  </div>
 
-    </div>
+  <script src="content.js"></script>
+  <script>
+    document.getElementById('name').textContent = CONTENT.name;
+    document.getElementById('role').innerHTML   = CONTENT.role;
+    document.getElementById('bio').innerHTML    = CONTENT.bio;
+    document.getElementById('footer').innerHTML = CONTENT.footer;
 
-    <div class="links">
+    const work = document.getElementById('work');
+    CONTENT.work.forEach(item => {
+      work.innerHTML += `
+        <div class="work-item">
+          <div class="work-label">${item.label}</div>
+          <div class="work-text">${item.text}</div>
+        </div>`;
+    });
 
-      <a class="btn" href="https://www.linkedin.com/in/grahamharrell" target="_blank" rel="noopener noreferrer">
+    const links = document.getElementById('links');
+    const l = CONTENT.links;
+    links.innerHTML = `
+      <a class="btn" href="${l.linkedin}" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
           <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
         </svg>
         <span>LinkedIn</span>
       </a>
-
-      <a class="btn" href="https://github.com/ghrrll" target="_blank" rel="noopener noreferrer">
+      <a class="btn" href="${l.github}" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
         </svg>
         <span>GitHub</span>
       </a>
-
-      <a class="btn" href="https://kalibrilabs.com" target="_blank" rel="noopener noreferrer">
+      <a class="btn" href="${l.kalibri}" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"/>
           <line x1="2" y1="12" x2="22" y2="12"/>
@@ -312,22 +294,13 @@
         </svg>
         <span>Kalibri Labs</span>
       </a>
-
-      <a class="btn" href="mailto:graham@hrrll.com">
+      <a class="btn" href="mailto:${l.email}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="4" width="20" height="16" rx="2"/>
           <polyline points="2,4 12,13 22,4"/>
         </svg>
         <span>Get in Touch</span>
-      </a>
-
-    </div>
-
-    <div class="footer">
-      <p>&copy; hrrll 2026</p>
-    </div>
-
-  </div>
-
+      </a>`;
+  </script>
 </body>
 </html>
