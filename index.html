@@ -13,11 +13,11 @@
     :root {
       --bg:           #0c0c0e;
       --surface:      #131318;
-      --border:       #222228;
+      --border:       #1e1e24;
       --text:         #eeeae4;
       --text-muted:   #6b6b72;
       --accent:       #c9a96e;
-      --accent-dim:   rgba(201, 169, 110, 0.12);
+      --accent-dim:   rgba(201, 169, 110, 0.10);
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
@@ -31,8 +31,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 3rem 1.5rem;
+      padding: 5rem 1.5rem 4rem;
       opacity: 0;
       animation: fadeIn 1s ease forwards;
       animation-delay: 0.2s;
@@ -56,16 +55,35 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
+    }
+
+    /* ── Portrait ── */
+    .portrait {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid rgba(201, 169, 110, 0.3);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 0.9s ease forwards;
+      animation-delay: 0.3s;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .portrait:hover {
+      box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2);
     }
 
     /* ── Wordmark ── */
     .wordmark {
-      margin-bottom: 2.8rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
       opacity: 0;
       transform: translateY(10px);
       animation: rise 0.9s ease forwards;
-      animation-delay: 0.4s;
+      animation-delay: 0.45s;
     }
 
     .wordmark h1 {
@@ -92,78 +110,119 @@
     .divider {
       width: 36px;
       height: 1px;
-      background: rgba(201, 169, 110, 0.35);
-      margin: 0 auto 2.8rem;
+      background: rgba(201, 169, 110, 0.3);
+      margin: 0 auto 2.5rem;
       opacity: 0;
       animation: fadeIn 0.8s ease forwards;
       animation-delay: 0.85s;
     }
 
-    /* ── About ── */
-    .about {
+    /* ── Bio ── */
+    .bio {
+      text-align: center;
       margin-bottom: 3rem;
       opacity: 0;
       animation: fadeIn 0.8s ease forwards;
       animation-delay: 1s;
     }
 
-    .about p {
+    .bio p {
       font-size: 0.95rem;
       line-height: 1.9;
       color: var(--text-muted);
       letter-spacing: 0.01em;
-      max-width: 480px;
+      max-width: 500px;
     }
 
-    .about p strong {
+    .bio p strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* ── Work section ── */
+    .work {
+      width: 100%;
+      border: 1px solid var(--border);
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+      animation-delay: 1.1s;
+    }
+
+    .work-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 1.25rem;
+      padding: 1.1rem 1.5rem;
+      align-items: start;
+    }
+
+    .work-item + .work-item {
+      border-top: 1px solid var(--border);
+    }
+
+    .work-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 0.2rem;
+      opacity: 0.7;
+    }
+
+    .work-text {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .work-text strong {
       color: var(--text);
       font-weight: 400;
     }
 
     /* ── Links ── */
     .links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
       width: 100%;
-      max-width: 400px;
       opacity: 0;
       animation: fadeIn 0.8s ease forwards;
-      animation-delay: 1.15s;
+      animation-delay: 1.2s;
     }
 
     .btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
       width: 100%;
-      padding: 0.9rem 1.5rem;
-      border: 1px solid rgba(201, 169, 110, 0.18);
+      padding: 0.85rem 1rem;
+      border: 1px solid rgba(201, 169, 110, 0.15);
       background: transparent;
       color: var(--text);
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 300;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       text-decoration: none;
       cursor: pointer;
       transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-      position: relative;
-      overflow: hidden;
     }
 
     .btn:hover {
-      border-color: rgba(201, 169, 110, 0.5);
+      border-color: rgba(201, 169, 110, 0.45);
       color: var(--accent);
       background: var(--accent-dim);
     }
 
     .btn svg {
-      width: 14px;
-      height: 14px;
-      opacity: 0.6;
+      width: 13px;
+      height: 13px;
+      opacity: 0.55;
       flex-shrink: 0;
       transition: opacity 0.2s ease;
     }
@@ -172,24 +231,26 @@
 
     /* ── Footer ── */
     .footer {
-      margin-top: 3.5rem;
+      margin-top: 4rem;
       opacity: 0;
       animation: fadeIn 0.8s ease forwards;
-      animation-delay: 1.3s;
+      animation-delay: 1.35s;
     }
 
     .footer p {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(201, 169, 110, 0.3);
+      color: rgba(201, 169, 110, 0.25);
     }
   </style>
 </head>
 <body>
 
   <div class="container">
+
+    <img src="photo.jpg" alt="Graham Harrell" class="portrait" onerror="this.style.display='none'">
 
     <div class="wordmark">
       <h1>Graham Harrell</h1>
@@ -198,11 +259,32 @@
 
     <div class="divider"></div>
 
-    <div class="about">
+    <div class="bio">
       <p>
-        Building products at the intersection of <strong>data, hospitality, and AI</strong>.<br>
-        Based in Chattanooga, TN.
+        I'm a product leader at <strong>Kalibri Labs</strong>, where I work at the intersection of
+        data, hospitality, and AI. I build tools that help hotel operators understand their competitive
+        position and make smarter revenue decisions — from analytics and benchmarking to
+        agent-driven market intelligence. Based in Chattanooga, TN.
       </p>
+    </div>
+
+    <div class="work">
+
+      <div class="work-item">
+        <div class="work-label">Currently</div>
+        <div class="work-text">Head of Product at <strong>Kalibri Labs</strong> — building data and AI products for the hotel industry.</div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-label">Building</div>
+        <div class="work-text">Automated intelligence agents that synthesize competitive signals and deliver daily and weekly briefings to hotel operators.</div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-label">Studio</div>
+        <div class="work-text"><strong>hrrll</strong> — a small studio for design and build projects for people I believe in.</div>
+      </div>
+
     </div>
 
     <div class="links">
@@ -213,6 +295,13 @@
           <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
         </svg>
         <span>LinkedIn</span>
+      </a>
+
+      <a class="btn" href="https://github.com/ghrrll" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+        </svg>
+        <span>GitHub</span>
       </a>
 
       <a class="btn" href="https://kalibrilabs.com" target="_blank" rel="noopener noreferrer">
