@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graham Harrell</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0c0c0e;
+      --surface:      #131318;
+      --border:       #222228;
+      --text:         #eeeae4;
+      --text-muted:   #6b6b72;
+      --accent:       #c9a96e;
+      --accent-dim:   rgba(201, 169, 110, 0.12);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      z-index: 999;
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes rise   { to { opacity: 1; transform: translateY(0); } }
+
+    .container {
+      width: 100%;
+      max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ── Wordmark ── */
+    .wordmark {
+      margin-bottom: 2.8rem;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: rise 0.9s ease forwards;
+      animation-delay: 0.4s;
+    }
+
+    .wordmark h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 10vw, 4.5rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .wordmark .role {
+      margin-top: 0.7rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 36px;
+      height: 1px;
+      background: rgba(201, 169, 110, 0.35);
+      margin: 0 auto 2.8rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+      animation-delay: 0.85s;
+    }
+
+    /* ── About ── */
+    .about {
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+      animation-delay: 1s;
+    }
+
+    .about p {
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: var(--text-muted);
+      letter-spacing: 0.01em;
+      max-width: 480px;
+    }
+
+    .about p strong {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* ── Links ── */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 400px;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+      animation-delay: 1.15s;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      border: 1px solid rgba(201, 169, 110, 0.18);
+      background: transparent;
+      color: var(--text);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      border-color: rgba(201, 169, 110, 0.5);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .btn svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.6;
+      flex-shrink: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn:hover svg { opacity: 1; }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 3.5rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+      animation-delay: 1.3s;
+    }
+
+    .footer p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(201, 169, 110, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="wordmark">
+      <h1>Graham Harrell</h1>
+      <div class="role">Head of Product &nbsp;·&nbsp; Kalibri Labs</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="about">
+      <p>
+        Building products at the intersection of <strong>data, hospitality, and AI</strong>.<br>
+        Based in Chattanooga, TN.
+      </p>
+    </div>
+
+    <div class="links">
+
+      <a class="btn" href="https://www.linkedin.com/in/grahamharrell" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/>
+          <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+        </svg>
+        <span>LinkedIn</span>
+      </a>
+
+      <a class="btn" href="https://kalibrilabs.com" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+        </svg>
+        <span>Kalibri Labs</span>
+      </a>
+
+      <a class="btn" href="mailto:graham@hrrll.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <polyline points="2,4 12,13 22,4"/>
+        </svg>
+        <span>Get in Touch</span>
+      </a>
+
+    </div>
+
+    <div class="footer">
+      <p>&copy; hrrll 2026</p>
+    </div>
+
+  </div>
+
+</body>
+</html>
