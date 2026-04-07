@@ -6,29 +6,30 @@
 const CONTENT = {
 
   name: "Graham Harrell",
-  role: "Head of Product · Kalibri Labs",
+  role: "Product & AI",
 
-  bio: `I'm a product leader at <strong>Kalibri Labs</strong>, where I work at the
-        intersection of data, hospitality, and AI. I build tools that help hotel
-        operators understand their competitive position and make smarter revenue
-        decisions — from analytics and benchmarking to agent-driven market
-        intelligence. Based in Chattanooga, TN.`,
+  bio: `Product leader with 9+ years turning messy business problems into products people actually use. 
+I've taken products from concept to market and scaled them through growth, working across early-stage startups and established enterprises in hospitality, 
+data analytics, healthcare, and AI. My work lives at the intersection of data and customer empathy. 
+I spend as much time listening to clients and understanding their real problems as I do partnering with engineering, design, and sales to build the right thing. 
+
+Based in Chattanooga, TN.`,
 
   work: [
     {
       label: "Currently",
-      text: `Head of Product at <strong>Kalibri Labs</strong> — building data and AI
+      text: `Director of Product at Kalibri — building data and AI
              products for the hotel industry.`
     },
     {
       label: "Building",
-      text: `Automated intelligence agents that synthesize competitive signals and
-             deliver daily and weekly briefings to hotel operators.`
+      text: `An AI product layer inside Kalibri Labs — competitive intelligence agents,
+             automated market briefings, bid analysis tools, and revenue analytics.
+             The backlog never shrinks.`
     },
     {
-      label: "Studio",
-      text: `<strong>hrrll</strong> — a small studio for design and build projects
-             for people I believe in.`
+      label: "On the side",
+      text: `<strong>hrrll</strong> — design and build projects for people I believe in.`
     }
   ],
 
