@@ -277,6 +277,73 @@
 
     .btn:hover svg { opacity: 1; }
 
+    /* ── Private nav ── */
+    #priv-trigger {
+      position: fixed;
+      bottom: 20px;
+      right: 24px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 9999;
+      color: rgba(201, 169, 110, 0.15);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 18px;
+      line-height: 1;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    #priv-trigger:hover { color: rgba(201, 169, 110, 0.5); }
+
+    #priv-menu {
+      position: fixed;
+      bottom: 52px;
+      right: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 5px;
+      z-index: 9999;
+      min-width: 200px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+    }
+    #priv-menu.open { display: flex; }
+
+    #priv-menu a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      border-radius: 6px;
+      color: var(--text-muted) !important;
+      text-decoration: none !important;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: background 0.15s, color 0.15s;
+    }
+    #priv-menu a:hover {
+      background: var(--accent-dim);
+      color: var(--accent) !important;
+    }
+    #priv-menu a span.priv-domain {
+      font-size: 0.55rem;
+      opacity: 0.4;
+      letter-spacing: 0.1em;
+    }
+    #priv-menu-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 3px 6px;
+    }
+
     /* ── Footer ── */
     .footer {
       margin-top: 4rem;
@@ -330,6 +397,27 @@
     <div class="footer"><p id="footer"></p></div>
 
   </div>
+
+  <!-- Private site nav -->
+  <div id="priv-trigger">·</div>
+  <div id="priv-menu">
+    <a href="https://homerun.hrrll.com" target="_blank">
+      <span>Home Run</span>
+      <span class="priv-domain">homerun.hrrll.com</span>
+    </a>
+    <a href="https://meals.hrrll.com" target="_blank">
+      <span>Meals</span>
+      <span class="priv-domain">meals.hrrll.com</span>
+    </a>
+  </div>
+  <script>
+    (function() {
+      var t = document.getElementById('priv-trigger');
+      var m = document.getElementById('priv-menu');
+      t.addEventListener('click', function(e) { e.stopPropagation(); m.classList.toggle('open'); });
+      document.addEventListener('click', function() { m.classList.remove('open'); });
+    })();
+  </script>
 
   <script src="content.js"></script>
   <script>
