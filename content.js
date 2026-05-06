@@ -16,7 +16,7 @@ const CONTENT = {
   work: [
     {
       label: "Currently",
-      text:  `Director of Product at <strong>Kalibri</strong> — building data and AI products for the hotel industry.`
+      text:  `Director of Product at <em>Kalibri</em> — building data and AI products for the hotel industry.`
     },
     {
       label: "Building",
@@ -24,7 +24,7 @@ const CONTENT = {
     },
     {
       label: "On the side",
-      text:  `<strong>hrrll</strong> — design &amp; build for people and projects I believe in.`
+      text:  `<em>hrrll</em> — design &amp; build for people and projects I believe in.`
     }
   ],
 
@@ -32,10 +32,10 @@ const CONTENT = {
   // Use <em>...</em> for emphasis (renders gold italic).
   // Use <span class="by">— author</span> for secondary text.
   now: [
-    { key: "Reading",   val: `<em>The Beginning of Infinity</em> <span class="by">— David Deutsch</span>` },
-    { key: "Listening", val: `<em>Sturgill Simpson</em>, on repeat` },
-    { key: "Building",  val: `An evals harness for our agent stack.` },
-    { key: "Drinking",  val: `Black coffee, Velo Coffee Roasters.` }
+    { key: "Reading",   val: `<em>For we are Many</em> <span class="by">— Dennis E. Taylor</span>` },
+    { key: "Listening", val: `<em>Miles Davis</em>, on repeat` },
+    { key: "In my Free Time",  val: `A 130 yearold house full of projects and me having no idea what I'm doing` },
+    { key: "Drinking",  val: `Coffee, always coffee....` }
   ],
 
   // Contact links. Email is rendered first (primary CTA).
@@ -43,7 +43,7 @@ const CONTENT = {
     email:    "graham@hrrll.com",
     linkedin: "https://www.linkedin.com/in/grahamharrell",
     github:   "https://github.com/ghrrll",
-    calendar: "https://cal.com/grahamharrell"
+    calendar: "https://calendar.app.google/yeAArevTXXeCeWkp9"
   },
 
   footer: "© hrrll · MMXXVI"
