@@ -452,16 +452,57 @@
     .fade-in.d6 { animation-delay: 0.85s; }
     @keyframes fadeIn { to { opacity: 1; } }
 
-    /* Responsive — single screen still, but stack columns on narrow */
+    /* ── Tablet (≤ 880px) ── */
     @media (max-width: 880px) {
       body { overflow: auto; }
-      .stage { padding: 22px 22px; }
+      .stage { padding: 20px 24px 24px; }
       .strip {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 28px;
+        margin-top: 28px;
       }
       .strip .vsep { display: none; }
-      .wordmark h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
+      .wordmark h1 {
+        font-size: clamp(2.6rem, 10vw, 4rem);
+        white-space: normal;
+      }
+    }
+
+    /* ── Phone (≤ 480px) ── */
+    @media (max-width: 480px) {
+      .stage {
+        padding: 16px 18px 28px;
+        grid-template-rows: auto auto auto;
+        min-height: 100dvh;
+      }
+      .g-mark { width: 38px; height: 38px; font-size: 1.6rem; }
+      .meta { font-size: 0.52rem; letter-spacing: 0.16em; gap: 3px; }
+      .meta .live::before { width: 4px; height: 4px; }
+      .wordmark h1 {
+        font-size: clamp(2.4rem, 13vw, 3.2rem);
+        letter-spacing: 0.06em;
+        white-space: normal;
+      }
+      .wordmark .role {
+        font-size: 0.55rem;
+        letter-spacing: 0.28em;
+        margin-top: 10px;
+      }
+      .bio { margin-top: 16px; }
+      .bio p { font-size: 1rem; }
+      .strip { margin-top: 24px; gap: 24px; }
+      .col-head { font-size: 0.5rem; margin-bottom: 10px; }
+      .work-item .work-text { font-size: 0.88rem; }
+      .now-val { font-size: 0.88rem; }
+      .link-row { font-size: 0.6rem; letter-spacing: 0.14em; padding: 10px 4px; }
+      .login-row { font-size: 0.6rem; letter-spacing: 0.14em; padding: 10px 4px; }
+      .login-submenu a { font-size: 0.55rem; padding: 9px 4px 9px 30px; }
+      .footer-frame {
+        flex-direction: column;
+        gap: 4px;
+        align-items: flex-start;
+        font-size: 0.48rem;
+      }
     }
 
     /* Tweaks panel dark override (inherits from starter, but we want a dark variant) */
