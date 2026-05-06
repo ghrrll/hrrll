@@ -1,44 +1,51 @@
 // ─────────────────────────────────────────────
 //  hrrll.com — site content
 //  Edit this file to update copy on the site.
+//  Wrap a phrase in <em>...</em> for gold italic accent.
 // ─────────────────────────────────────────────
 
 const CONTENT = {
 
-  name: "Graham Harrell",
-  role: "Product & AI",
+  // Tagline under the wordmark. Use <span class="dot">·</span> as separator.
+  role: `Product <span class="dot">·</span> AI <span class="dot">·</span> Strategy`,
 
-  bio: `Product leader with 9+ years turning messy business problems into products people actually use. 
-I've taken products from concept to market and scaled them through growth, working across early-stage startups and established enterprises in hospitality, 
-data analytics, healthcare, and AI. My work lives at the intersection of data and customer empathy. 
-I spend as much time listening to clients and understanding their real problems as I do partnering with engineering, design, and sales to build the right thing. 
+  // Short bio paragraph. <em> phrases will be styled gold + italic.
+  bio: `Nine years turning <em>messy business problems</em> into products people actually use — across hospitality, data, healthcare, and AI. My work lives at the intersection of data and customer empathy.`,
 
-Based in Chattanooga, TN.`,
-
+  // Work column — three short items.
   work: [
     {
       label: "Currently",
-      text: `Director of Product at Kalibri — building data and AI
-             products for the hotel industry.`
+      text:  `Director of Product at <strong>Kalibri</strong> — building data and AI products for the hotel industry.`
     },
     {
       label: "Building",
-      text: `An AI product layer inside Kalibri — competitive intelligence agents,
-             automated market briefings, and revenue analytics.
-             The backlog never shrinks.`
+      text:  `An AI product layer inside Kalibri — competitive intelligence agents, automated market briefings, revenue analytics.`
     },
     {
       label: "On the side",
-      text: `<strong>hrrll</strong> — design and build projects for people & projects I believe in.`
+      text:  `<strong>hrrll</strong> — design &amp; build for people and projects I believe in.`
     }
   ],
 
+  // Now section — what you're up to right now. Edit freely.
+  // Use <em>...</em> for emphasis (renders gold italic).
+  // Use <span class="by">— author</span> for secondary text.
+  now: [
+    { key: "Reading",   val: `<em>The Beginning of Infinity</em> <span class="by">— David Deutsch</span>` },
+    { key: "Listening", val: `<em>Sturgill Simpson</em>, on repeat` },
+    { key: "Building",  val: `An evals harness for our agent stack.` },
+    { key: "Drinking",  val: `Black coffee, Velo Coffee Roasters.` }
+  ],
+
+  // Contact links. Email is rendered first (primary CTA).
   links: {
+    email:    "graham@hrrll.com",
     linkedin: "https://www.linkedin.com/in/grahamharrell",
     github:   "https://github.com/ghrrll",
-    email:    "graham@hrrll.com"
+    calendar: "https://cal.com/grahamharrell"
   },
 
-  footer: "© hrrll 2026"
+  footer: "© hrrll · MMXXVI"
 
-}
+};
