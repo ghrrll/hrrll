@@ -633,7 +633,25 @@
       });
     })();
 
-    /* ── Easter egg 2: Konami → confetti rain of G's ── */
+    /* ── Easter egg 2: type "hrrll" → open tweaks panel ── */
+    (function() {
+      var word = 'hrrll', pos = 0;
+      window.addEventListener('keydown', function(e) {
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        var k = e.key.toLowerCase();
+        if (k === word[pos]) {
+          pos++;
+          if (pos === word.length) {
+            pos = 0;
+            window.dispatchEvent(new MessageEvent('message', { data: { type: '__activate_edit_mode' } }));
+          }
+        } else {
+          pos = (k === word[0]) ? 1 : 0;
+        }
+      });
+    })();
+
+    /* ── Easter egg 3: Konami → confetti rain of G's ── */
     (function() {
       var seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
       var pos = 0;
