@@ -7,7 +7,7 @@
 const CONTENT = {
 
   // Tagline under the wordmark. Use <span class="dot">·</span> as separator.
-  role: `Product <span class="dot">·</span> AI <span class="dot">·</span> Strategy`,
+  role: `<span id="accent-cycle" title="click me">Product</span> <span class="dot">·</span> AI <span class="dot">·</span> Strategy`,
 
   // Short bio paragraph. <em> phrases will be styled gold + italic.
   bio: `Nine years turning <em>messy business problems</em> into products people actually use — across hospitality, data, healthcare, and AI. My work lives at the intersection of data and customer empathy.`,

@@ -9,10 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -217,6 +213,8 @@
       color: var(--accent);
     }
     .wordmark .role .dot { color: var(--text-faint); padding: 0 0.6em; }
+    #accent-cycle { cursor: pointer; transition: opacity 0.15s; }
+    #accent-cycle:hover { opacity: 0.7; }
 
     /* Bio */
     .bio {
@@ -507,18 +505,6 @@
       }
     }
 
-    /* Tweaks panel dark override (inherits from starter, but we want a dark variant) */
-    .twk-panel {
-      background: rgba(20, 20, 24, 0.85) !important;
-      color: var(--text) !important;
-      border-color: var(--border-strong) !important;
-    }
-    .twk-panel .twk-x { color: var(--text-muted) !important; }
-    .twk-panel .twk-x:hover { background: rgba(255,255,255,0.06) !important; color: var(--text) !important; }
-    .twk-panel .twk-lbl { color: var(--text-soft) !important; }
-    .twk-panel .twk-val { color: var(--text-muted) !important; }
-    .twk-panel .twk-sect { color: var(--accent) !important; opacity: 0.85; }
-    .twk-panel .twk-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15) !important; }
   </style>
 </head>
 <body>
@@ -581,9 +567,6 @@
     </footer>
   </main>
 
-
-  <!-- Tweaks mount -->
-  <div id="tweaks-root"></div>
 
   <script src="content.js"></script>
   <script>
@@ -681,25 +664,7 @@
       });
     })();
 
-    /* ── Easter egg 2: type "hrrll" → open tweaks panel ── */
-    (function() {
-      var word = 'hrrll', pos = 0;
-      window.addEventListener('keydown', function(e) {
-        if (e.metaKey || e.ctrlKey || e.altKey) return;
-        var k = e.key.toLowerCase();
-        if (k === word[pos]) {
-          pos++;
-          if (pos === word.length) {
-            pos = 0;
-            window.dispatchEvent(new MessageEvent('message', { data: { type: '__activate_edit_mode' } }));
-          }
-        } else {
-          pos = (k === word[0]) ? 1 : 0;
-        }
-      });
-    })();
-
-    /* ── Easter egg 3: Konami → confetti rain of G's ── */
+    /* ── Easter egg 2: Konami → confetti rain of G's ── */
     (function() {
       var seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
       var pos = 0;
@@ -737,110 +702,48 @@
     })();
   </script>
 
-  <!-- Tweaks -->
-  <script type="text/babel" src="tweaks-panel.jsx"></script>
-  <script type="text/babel">
-    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-      "accent": "#7a8a6e",
-      "texture": "hatch"
-    }/*EDITMODE-END*/;
+  <script>
+    /* ── Accent color cycle on "Product" click ── */
+    (function() {
+      var ACCENTS = [
+        '#c9a96e', // gold
+        '#a89a7a', // bone
+        '#8a3324', // oxblood
+        '#7a8a6e', // sage
+        '#9aa8b8', // ice / steel
+        '#d97757'  // copper
+      ];
+      var idx = 0;
 
-    const ACCENTS = [
-      "#c9a96e", // gold (default)
-      "#a89a7a", // bone / champagne
-      "#8a3324", // oxblood
-      "#7a8a6e", // sage
-      "#9aa8b8", // ice / steel
-      "#d97757"  // copper
-    ];
-
-    const TEXTURES = ['clean', 'hatch', 'mountains', 'starfield', 'grid'];
-
-    function hexToRgba(hex, a) {
-      const h = hex.replace('#','');
-      const r = parseInt(h.substr(0,2),16);
-      const g = parseInt(h.substr(2,2),16);
-      const b = parseInt(h.substr(4,2),16);
-      return `rgba(${r},${g},${b},${a})`;
-    }
-
-    function applyAccent(color) {
-      const root = document.documentElement;
-      root.style.setProperty('--accent', color);
-      root.style.setProperty('--accent-soft', hexToRgba(color, 0.55));
-      root.style.setProperty('--accent-dim',  hexToRgba(color, 0.10));
-      root.style.setProperty('--accent-line', hexToRgba(color, 0.22));
-    }
-
-    function applyTexture(name) {
-      const host = document.getElementById('bg-host');
-      host.innerHTML = '';
-      const layer = document.createElement('div');
-      layer.className = 'bg-tex bg-' + name;
-
-      if (name === 'mountains') {
-        layer.innerHTML = `
-          <svg viewBox="0 0 1440 240" preserveAspectRatio="xMidYMax slice">
-            <path d="M0,148 C90,132 180,118 270,112 C360,106 450,122 540,114 C630,106 720,90 810,84 C900,78 990,86 1080,78 C1170,70 1260,76 1350,86 C1395,91 1420,96 1440,94 L1440,240 L0,240 Z"
-                  fill="${hexToRgba(getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), 0.04)}"/>
-            <path d="M0,192 C90,176 180,166 270,173 C360,180 450,165 540,170 C630,175 720,160 810,156 C900,152 990,160 1080,155 C1170,150 1260,158 1350,168 C1395,173 1420,178 1440,175 L1440,240 L0,240 Z"
-                  fill="${hexToRgba(getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(), 0.06)}"/>
-          </svg>`;
+      function hexToRgba(hex, a) {
+        var h = hex.replace('#', '');
+        var r = parseInt(h.substr(0,2),16);
+        var g = parseInt(h.substr(2,2),16);
+        var b = parseInt(h.substr(4,2),16);
+        return 'rgba('+r+','+g+','+b+','+a+')';
       }
 
-      if (name === 'starfield') {
-        const frag = document.createDocumentFragment();
-        for (let i = 0; i < 80; i++) {
-          const s = document.createElement('div');
-          s.className = 'star';
-          s.style.left = (Math.random() * 100) + '%';
-          s.style.top  = (Math.random() * 100) + '%';
-          s.style.setProperty('--d', (3 + Math.random() * 5).toFixed(1) + 's');
-          s.style.setProperty('--delay', (Math.random() * 5).toFixed(1) + 's');
-          s.style.setProperty('--max', (0.25 + Math.random() * 0.5).toFixed(2));
-          if (Math.random() > 0.85) {
-            s.style.width = '2px';
-            s.style.height = '2px';
-          }
-          frag.appendChild(s);
-        }
-        layer.appendChild(frag);
+      function applyAccent(color) {
+        var root = document.documentElement;
+        root.style.setProperty('--accent',      color);
+        root.style.setProperty('--accent-soft', hexToRgba(color, 0.55));
+        root.style.setProperty('--accent-dim',  hexToRgba(color, 0.10));
+        root.style.setProperty('--accent-line', hexToRgba(color, 0.22));
       }
 
-      host.appendChild(layer);
-    }
+      // Apply default on load
+      applyAccent(ACCENTS[0]);
 
-    function App() {
-      const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-
-      React.useEffect(() => { applyAccent(t.accent); }, [t.accent]);
-      React.useEffect(() => { applyTexture(t.texture); }, [t.texture, t.accent]);
-
-      return (
-        <TweaksPanel title="Tweaks">
-          <TweakSection label="Accent" />
-          <TweakColor
-            label="Color"
-            value={t.accent}
-            options={ACCENTS}
-            onChange={(v) => setTweak('accent', v)}
-          />
-          <TweakSection label="Background" />
-          <TweakSelect
-            label="Texture"
-            value={t.texture}
-            options={TEXTURES}
-            onChange={(v) => setTweak('texture', v)}
-          />
-        </TweaksPanel>
-      );
-    }
-
-    /* Initial paint: read defaults so the first frame matches even before React mounts */
-    applyAccent(TWEAK_DEFAULTS.accent);
-    applyTexture(TWEAK_DEFAULTS.texture);
-
-    ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<App />);
+      // Wire up after content renders
+      document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementById('accent-cycle');
+        if (!el) return;
+        el.addEventListener('click', function() {
+          idx = (idx + 1) % ACCENTS.length;
+          applyAccent(ACCENTS[idx]);
+        });
+      });
+    })();
   </script>
 
 </body>
