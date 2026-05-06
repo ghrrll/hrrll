@@ -376,58 +376,60 @@
     }
     .footer-frame a:hover { color: var(--accent); }
 
-    /* ── Private nav ── */
-    #priv-trigger {
-      position: fixed;
-      bottom: 18px;
-      right: 22px;
-      width: 36px; height: 36px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: default;
-      z-index: 200;
-      color: rgba(201, 169, 110, 0.35);
+    /* ── Login dropdown (in contact column) ── */
+    .login-row {
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 4px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 26px;
-      line-height: 1;
+      font-size: 0.64rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 400;
+      cursor: default;
       user-select: none;
       transition: color 0.2s;
     }
-    #priv-trigger:hover { color: rgba(201, 169, 110, 0.7); }
+    .login-row:last-child { border-bottom: none; }
+    .login-row .icon { width: 14px; height: 14px; color: var(--accent); opacity: 0.7; }
+    .login-row .icon svg { width: 100%; height: 100%; display: block; }
+    .login-row .arrow {
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--accent);
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+    }
+    .login-row:hover { color: var(--accent); }
+    .login-row:hover .icon { opacity: 1; }
+    .login-row.open .arrow { transform: rotate(90deg); }
 
-    #priv-menu {
-      position: fixed;
-      bottom: 50px;
-      right: 16px;
-      background: var(--surface);
-      border: 1px solid var(--border-strong);
-      border-radius: 4px;
-      padding: 4px;
-      z-index: 200;
-      min-width: 220px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    .login-submenu {
       display: none;
       flex-direction: column;
-      gap: 1px;
+      border-bottom: 1px solid var(--border);
+      margin: 0;
     }
-    #priv-menu.open { display: flex; }
-
-    #priv-menu a {
+    .login-submenu.open { display: flex; }
+    .login-submenu a {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 9px 12px;
+      padding: 8px 4px 8px 34px;
       color: var(--text-muted);
       text-decoration: none;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      transition: background 0.15s, color 0.15s;
+      border-top: 1px solid var(--border);
+      transition: color 0.15s;
     }
-    #priv-menu a:hover { background: var(--accent-dim); color: var(--accent); }
-    #priv-menu a .dom {
-      font-size: 0.5rem; opacity: 0.4; letter-spacing: 0.08em;
-    }
+    .login-submenu a:hover { color: var(--accent); }
+    .login-submenu a .dom { font-size: 0.5rem; opacity: 0.4; }
 
     /* Confetti easter egg */
     .confetti-g {
@@ -536,16 +538,6 @@
     </footer>
   </main>
 
-  <!-- Private site nav -->
-  <div id="priv-trigger" title="·">·</div>
-  <div id="priv-menu">
-    <a href="https://homerun.hrrll.com" target="_blank" rel="noopener noreferrer">
-      <span>Home Run</span><span class="dom">homerun.hrrll.com</span>
-    </a>
-    <a href="https://meals.hrrll.com" target="_blank" rel="noopener noreferrer">
-      <span>Meals</span><span class="dom">meals.hrrll.com</span>
-    </a>
-  </div>
 
   <!-- Tweaks mount -->
   <div id="tweaks-root"></div>
@@ -591,6 +583,27 @@
           <span class="arrow">${r.arrow}</span>
         </a>`).join('');
 
+      const loginIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>';
+      const loginRow = document.createElement('div');
+      loginRow.className = 'login-row';
+      loginRow.innerHTML = `<span class="icon">${loginIcon}</span><span>Login</span><span class="arrow">›</span>`;
+      const submenu = document.createElement('div');
+      submenu.className = 'login-submenu';
+      submenu.innerHTML = `
+        <a href="https://homerun.hrrll.com" target="_blank" rel="noopener noreferrer">
+          <span>Home Run</span><span class="dom">homerun.hrrll.com</span>
+        </a>
+        <a href="https://meals.hrrll.com" target="_blank" rel="noopener noreferrer">
+          <span>Meals</span><span class="dom">meals.hrrll.com</span>
+        </a>`;
+      loginRow.addEventListener('click', function() {
+        loginRow.classList.toggle('open');
+        submenu.classList.toggle('open');
+      });
+      const linksEl = document.getElementById('links-list');
+      linksEl.appendChild(loginRow);
+      linksEl.appendChild(submenu);
+
       document.querySelector('.footer-frame .left').textContent = CONTENT.footer;
       const footerEmail = document.querySelector('.footer-frame .right a');
       footerEmail.textContent = l.email;
@@ -611,14 +624,6 @@
     }
     updateTime();
     setInterval(updateTime, 30 * 1000);
-
-    /* ── Private nav ── */
-    (function() {
-      var t = document.getElementById('priv-trigger');
-      var m = document.getElementById('priv-menu');
-      t.addEventListener('click', function(e) { e.stopPropagation(); m.classList.toggle('open'); });
-      document.addEventListener('click', function() { m.classList.remove('open'); });
-    })();
 
     /* ── Easter egg 1: G monogram glyph cycle on click ── */
     (function() {
